@@ -15,10 +15,3 @@ steps:
     rootFolderOrFile: '$(build.sourcesDirectory)'
     includeRootFolder: false
 - task: PublishBuildArtifacts@1
-- task: AzureRmWebAppDeployment@4
-  inputs:
-    ConnectionType: 'AzureRM'
-    azureSubscription: 'azure subscription for lab #1 (85145e52-ffb3-41f3-a9fe-73100ed964a0)'
-    appType: 'webApp'
-    WebAppName: 'bookstore2'
-    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
