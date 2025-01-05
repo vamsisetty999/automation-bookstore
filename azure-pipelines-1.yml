@@ -13,8 +13,6 @@ stages:
   - stage: Build
     jobs:
       - job: BuildWebApp
-        pool:
-          vmImage: ubuntu-latest
         steps:
          - task: ArchiveFiles@2
            inputs:
@@ -30,7 +28,7 @@ stages:
             buildType: 'current'
             downloadType: 'single'
             artifactName: 'drop'
-            downloadPath: '$(System. DefaultWorkingDirectory)'
+            downloadPath: '$(System.DefaultWorkingDirectory)'
         - task: AzureRmWebAppDeployment@4
           inputs:
             ConnectionType: 'AzureRM'
