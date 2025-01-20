@@ -19,6 +19,23 @@ stages:
              rootFolderOrFile: '$(build.sourcesDirectory)'
              includeRootFolder: false
          - task: PublishBuildArtifacts@1
+  - stage: Qa
+    jobs:
+      - job: deployProd
+        steps:
+        - task: DownloadBuildArtifacts@1
+          inputs:
+            buildType: 'current'
+            downloadType: 'single'
+            artifactName: 'drop'
+            downloadPath: '$(System.DefaultWorkingDirectory)'
+        - task: AzureRmWebAppDeployment@4
+          inputs:
+            ConnectionType: 'AzureRM'
+            azureSubscription: 'azure subscription for lab #1 (85145e52-ffb3-41f3-a9fe-73100ed964a0)'
+            appType: 'webApp'
+            WebAppName: 'bookstore2'
+            packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
   - stage: Prod
     jobs:
       - job: deployProd
